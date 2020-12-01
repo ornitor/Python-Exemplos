@@ -54,7 +54,6 @@ def axisMotion():
         joy.init()
         for i in range(joy.get_numaxes()):
             s = s + encodeAxis(joy.get_axis(i))
-    # client.publish("joy/axis",s)
     print("joy/axis",s)
     return s
 
@@ -67,14 +66,12 @@ def hatMotion():
         for i in range(joy.get_numhats(),):
             a,b = joy.get_hat(i)
             s = s + str(a) + "," + str(b) + ","
-    # client.publish("joy/hat",s)
     print("joy/hat",s)
     return s
 
 def ballMotion():
     print("Joystick ball moved.")
     return s
-    # client.publish("joy/ball","on") 
 
 def buttonPressed():
     s = ""
@@ -83,7 +80,6 @@ def buttonPressed():
         joy.init()
         for i in range(12):
             s = s + "{}".format(joy.get_button(i))
-    # client.publish("joy/but",s) 
     print("buttom",s)
     return s
 
@@ -94,7 +90,6 @@ def buttonReleased():
         joy.init()
         for i in range(12):
             s = s + "{}".format(joy.get_button(i))
-    # client.publish("joy/but",s) 
     print("buttom",s)
     return s
 
@@ -121,12 +116,10 @@ while running:
     for i in range(12):
         if but[i]=="1":   # desenha os botões apertados
             pygame.draw.circle(screen, red, pos[i] ,9)
-            print(pygame.mouse.get_pos())
     for i in range(2): # desenha alavanca na posiçao atual
          x = axpos[i][0] + int(axis[i*4:i*4+2])*2
          y = axpos[i][1] + int(axis[i*4+2:i*4+4])*2
-         pygame.draw.circle(screen, gray, [x,y] ,12)
-         
+         pygame.draw.circle(screen, gray, [x,y] ,12)        
     ss = hat.split(',')     # desenha os ocntrole do hat se apertados
     xhat = int(ss[0])
     yhat = int(ss[1])
@@ -135,6 +128,6 @@ while running:
     if xhat != 0 : pygame.draw.circle(screen, yellow, [x,hpos[1]] ,7)
     if yhat != 0 : pygame.draw.circle(screen, yellow, [hpos[0], y] ,7)
     pygame.display.flip()
-    clock.tick(30)
+    clock.tick(300)
     
 pygame.quit()
